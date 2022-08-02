@@ -42,16 +42,22 @@ export const Login = () => {
             justifyContent: 'center',
           }}
         >
-          <OutlinedInput placeholder="Add email" sx={{ width: '300px' }} />
+          <OutlinedInput
+            placeholder="Add email"
+            sx={{ width: '300px', height: '44px' }}
+          />
 
-          <OutlinedInput placeholder="Add password" sx={{ width: '300px' }} />
+          <OutlinedInput
+            placeholder="Add password"
+            sx={{ width: '300px', height: '44px' }}
+          />
         </Box>
         <Button
           variant={'contained'}
           sx={{
             height: '44px',
             fontSize: '14px',
-            marginTop: '16px',
+            marginTop: '20px',
             color: 'white',
             backgroundColor: '#1065E6',
             width: '100px',
