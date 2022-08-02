@@ -22,10 +22,10 @@ export const Login = () => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          border: '1px solid blue',
           borderRadius: '12px',
           marginTop: '100px',
           padding: '24px',
+          boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.12);',
         }}
       >
         <Box>
@@ -42,12 +42,9 @@ export const Login = () => {
             justifyContent: 'center',
           }}
         >
-          <Box>
-            <OutlinedInput placeholder="Add email" fullWidth />
-          </Box>
-          <Box>
-            <OutlinedInput placeholder="Add password" fullWidth />
-          </Box>
+          <OutlinedInput placeholder="Add email" sx={{ width: '300px' }} />
+
+          <OutlinedInput placeholder="Add password" sx={{ width: '300px' }} />
         </Box>
         <Button
           variant={'contained'}
@@ -56,7 +53,7 @@ export const Login = () => {
             fontSize: '14px',
             marginTop: '16px',
             color: 'white',
-            backgroundColor: 'light-blue',
+            backgroundColor: '#1065E6',
             width: '100px',
           }}
         >

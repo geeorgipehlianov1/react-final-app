@@ -22,8 +22,8 @@ export const Register = () => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          border: '1px solid blue',
           borderRadius: '12px',
+          boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.12);',
           marginTop: '100px',
           padding: '24px',
         }}
@@ -42,12 +42,14 @@ export const Register = () => {
             justifyContent: 'center',
           }}
         >
-          <Box>
-            <OutlinedInput placeholder="Add email" fullWidth />
-          </Box>
-          <Box>
-            <OutlinedInput placeholder="Add password" sx={{ width: '100%' }} />
-          </Box>
+          <OutlinedInput placeholder="Add email" sx={{ width: '300px' }} />
+
+          <OutlinedInput placeholder="Add password" sx={{ width: '300px' }} />
+
+          <OutlinedInput
+            placeholder="Repeat password"
+            sx={{ width: '300px' }}
+          />
         </Box>
         <Button
           variant={'contained'}
@@ -56,11 +58,11 @@ export const Register = () => {
             fontSize: '14px',
             marginTop: '16px',
             color: 'white',
-            backgroundColor: 'light-blue',
+            backgroundColor: '#1065E6',
             width: '100px',
           }}
         >
-          Login
+          Register
         </Button>
       </Box>
     </AppContainer>
