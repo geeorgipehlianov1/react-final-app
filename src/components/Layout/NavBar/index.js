@@ -13,10 +13,13 @@ export const NavBar = () => {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Movie website
+              Movie list
             </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit">Register</Button>
+            <Button color="inherit">Add Book</Button>
+            <Button color="inherit">About</Button>
+            <Button color="inherit">My profile</Button>
           </Toolbar>
         </AppBar>
       </Box>

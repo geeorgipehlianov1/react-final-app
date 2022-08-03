@@ -8,6 +8,7 @@ export const Footer = () => {
       sx={{
         mb: 5,
         color: 'black',
+        position: 'static',
       }}
     >
       <AppContainer
