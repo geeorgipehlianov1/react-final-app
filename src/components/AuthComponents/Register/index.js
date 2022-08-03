@@ -1,8 +1,27 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
+import { useState } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
+import { register } from '../../../services/auth'
 
 export const Register = () => {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const [repass, setRepass] = useState()
+
+  const onRegisterHandler = async () => {
+    try {
+      if (password !== repass) {
+        alert('Password dont match')
+      } else {
+        const data = await register({ email, password })
+        console.log(data.data)
+      }
+    } catch (err) {
+      console.log(err.response.data.message)
+    }
+  }
+
   return (
     <AppContainer
       sx={{
@@ -44,16 +63,21 @@ export const Register = () => {
         >
           <OutlinedInput
             placeholder="Add email"
+            onChange={(e) => setEmail(e.target.value)}
             sx={{ width: '300px', height: '44px' }}
           />
 
           <OutlinedInput
             placeholder="Add password"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
             sx={{ width: '300px', height: '44px' }}
           />
 
           <OutlinedInput
             placeholder="Repeat password"
+            onChange={(e) => setRepass(e.target.value)}
+            type="password"
             sx={{ width: '300px', height: '44px' }}
           />
         </Box>
@@ -67,6 +91,7 @@ export const Register = () => {
             backgroundColor: '#1065E6',
             width: '100px',
           }}
+          onClick={onRegisterHandler}
         >
           Register
         </Button>

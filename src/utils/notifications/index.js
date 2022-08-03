@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify'
-import Image from 'next/image'
 
 const Notification = ({ title, description, actionText, action }) => {
   return (
@@ -14,9 +13,7 @@ const Notification = ({ title, description, actionText, action }) => {
 export const error = (msg, options) => {
   toast.error(<Notification {...msg} />, {
     ...options,
-    icon: () => (
-      <Image src="/error.svg" width="24px" height="24px" alt="icon" />
-    ),
+    icon: () => <img src="/error.svg" width="24px" height="24px" alt="icon" />,
   })
 }
 
@@ -24,7 +21,7 @@ export const success = (msg, options) => {
   toast.success(<Notification {...msg} />, {
     ...options,
     icon: () => (
-      <Image src={'/checkIcon.svg'} width="24px" height="24px" alt="icon" />
+      <img src={'/checkIcon.svg'} width="24px" height="24px" alt="icon" />
     ),
   })
 }
@@ -33,7 +30,7 @@ export const warn = (msg, options) => {
   toast.warn(<Notification {...msg} />, {
     ...options,
     icon: () => (
-      <Image src={'/warning.png'} width="24px" height="24px" alt="icon" />
+      <img src={'/warning.png'} width="24px" height="24px" alt="icon" />
     ),
   })
 }
@@ -41,8 +38,6 @@ export const warn = (msg, options) => {
 export const info = (msg, options) => {
   toast.info(<Notification {...msg} />, {
     ...options,
-    icon: () => (
-      <Image src={'/info.pns'} width="24px" height="24px" alt="icon" />
-    ),
+    icon: () => <img src={'/info.pns'} width="24px" height="24px" alt="icon" />,
   })
 }

@@ -1,13 +1,14 @@
 import axios from 'axios'
+import { BASE_URL } from '../constants'
 
-export const login = async () => {
-  axios.put()
+export const login = async (data) => {
+  return await axios.post(`${BASE_URL}users/login`, data)
 }
 
-export const Register = async () => {
-  axios.put()
+export const register = async (data) => {
+  return await axios.post(`${BASE_URL}users/register`, data)
 }
 
 export const Logout = async () => {
-  axios.get()
+  return await axios.get(`${BASE_URL}users/logout`)
 }

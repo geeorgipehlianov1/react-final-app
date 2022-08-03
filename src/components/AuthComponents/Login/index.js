@@ -1,8 +1,18 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
+import { useState } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
+import { login } from '../../../services/auth'
 
 export const Login = () => {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  const onLoginHandler = async () => {
+    const data = await login({ email, password })
+    console.log(data)
+  }
+
   return (
     <AppContainer
       sx={{
@@ -44,11 +54,15 @@ export const Login = () => {
         >
           <OutlinedInput
             placeholder="Add email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             sx={{ width: '300px', height: '44px' }}
           />
 
           <OutlinedInput
             placeholder="Add password"
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
             sx={{ width: '300px', height: '44px' }}
           />
         </Box>
@@ -62,6 +76,7 @@ export const Login = () => {
             backgroundColor: '#1065E6',
             width: '100px',
           }}
+          onClick={onLoginHandler}
         >
           Login
         </Button>
