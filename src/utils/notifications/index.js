@@ -13,7 +13,7 @@ const Notification = ({ title, description, actionText, action }) => {
 export const error = (msg, options) => {
   toast.error(<Notification {...msg} />, {
     ...options,
-    icon: () => <img src="/error.svg" width="24px" height="24px" alt="icon" />,
+    icon: () => <img src="/error.svg" alt="icon" />,
   })
 }
 

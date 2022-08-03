@@ -2,6 +2,7 @@ import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { useState } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
+import { error } from '../../../utils/notifications'
 import { register } from '../../../services/auth'
 
 export const Register = () => {
@@ -18,7 +19,7 @@ export const Register = () => {
         console.log(data.data)
       }
     } catch (err) {
-      console.log(err.response.data.message)
+      error({ title: 'A user with the same email already exists!' })
     }
   }
 
