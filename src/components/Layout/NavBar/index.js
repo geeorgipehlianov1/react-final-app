@@ -17,9 +17,10 @@ export const NavBar = () => {
             </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit">Register</Button>
-            <Button color="inherit">Add Book</Button>
+            <Button color="inherit">Add Movie</Button>
             <Button color="inherit">About</Button>
             <Button color="inherit">My profile</Button>
+            <Button color="inherit">Catalog</Button>
           </Toolbar>
         </AppBar>
       </Box>

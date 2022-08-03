@@ -24,6 +24,7 @@ export const Catalog = () => {
         maxWidth: '1200px',
       }}
     >
+      <Typography fontSize="28px">Full movie list</Typography>
       <Box
         sx={{
           display: 'grid',
