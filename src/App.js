@@ -6,12 +6,14 @@ import { NavBar } from './components/Layout/NavBar/index'
 import { CreateBook } from './components/Create/index'
 import { EditBook } from './components/Edit/index'
 import { Catalog } from './components/Catalog/index'
+import { Details } from './components/Details/index'
 
 function App() {
   return (
     <>
       <NavBar></NavBar>
-      <Catalog></Catalog>
+      <Details></Details>
+      {/* <Catalog></Catalog> */}
       {/* <EditBook></EditBook> */}
       {/* <HomePage></HomePage> */}
       {/* <CreateBook></CreateBook> */}
