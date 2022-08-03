@@ -36,8 +36,13 @@ export const Details = () => {
             <Box>
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
-              <Button variant="contained">Edit</Button>
-              <Button>Delete</Button>
+              <Button
+                variant="contained"
+                sx={{ color: 'white', backgroundColor: '#1065E6' }}
+              >
+                Edit
+              </Button>
+              <Button sx={{ color: 'red' }}>Delete</Button>
             </Box>
           </Box>
         </>
