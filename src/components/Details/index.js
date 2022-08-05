@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 
 import { getMovieById } from '../../services/movies'
 import { AppContainer } from '../Common/AppContainer'
+import { DeleteMoiveModal } from './DeleteModal/index'
 
 export const Details = () => {
   const [movie, setMovie] = useState()
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -14,6 +16,9 @@ export const Details = () => {
     })()
   }, [])
 
+  const onDeleteHandler = () => {
+    setIsDeleteModalOpen(true)
+  }
   return (
     <AppContainer
       sx={{
@@ -36,17 +41,26 @@ export const Details = () => {
             <Box>
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
-              <Button
-                variant="contained"
-                sx={{ color: 'white', backgroundColor: '#1065E6' }}
-              >
-                Edit
-              </Button>
-              <Button sx={{ color: 'red' }}>Delete</Button>
+              <Box sx={{ marginTop: '240px' }}>
+                <Button
+                  variant="contained"
+                  sx={{ color: 'white', backgroundColor: '#1065E6' }}
+                >
+                  Edit
+                </Button>
+                <Button sx={{ color: 'red' }} onClick={onDeleteHandler}>
+                  Delete
+                </Button>
+              </Box>
             </Box>
           </Box>
         </>
       )}
+      <DeleteMoiveModal
+        movie={movie}
+        isOpen={isDeleteModalOpen}
+        closeModal={() => setIsDeleteModalOpen(false)}
+      />
     </AppContainer>
   )
 }
