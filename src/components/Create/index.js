@@ -1,8 +1,12 @@
 import { Typography, OutlinedInput, Box, Button } from '@mui/material'
+// import { useNavigate } from 'react-router-dom'
 
 import { AppContainer } from '../Common/AppContainer'
 
 export const CreateBook = () => {
+  //   const redirecter = useNavigate()
+  //   const onAddMovieHandler = () => {}
+
   return (
     <AppContainer
       sx={{
@@ -45,6 +49,7 @@ export const CreateBook = () => {
           width: '300px',
         }}
         variant="contained"
+        // onClick={() => redirecter.push('/catalog')}
       >
         Add movie
       </Button>

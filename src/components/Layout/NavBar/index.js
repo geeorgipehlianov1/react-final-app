@@ -2,25 +2,90 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import { AppContainer } from '../../Common/AppContainer'
+import { Link } from 'react-router-dom'
 
+import { AppContainer } from '../../Common/AppContainer'
 export const NavBar = () => {
   return (
     <AppContainer sx={{ maxWidth: '1400px' }}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Movie list
-            </Typography>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Register</Button>
-            <Button color="inherit">Add Movie</Button>
-            <Button color="inherit">About</Button>
-            <Button color="inherit">My profile</Button>
-            <Button color="inherit">Catalog</Button>
+            <Link
+              to="/"
+              style={{
+                flexGrow: 1,
+                textDecoration: 'none',
+                color: 'inherit',
+                fontSize: '24px',
+              }}
+            >
+              Movie List
+            </Link>
+            <Link
+              to="/login"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+            >
+              Login
+            </Link>
+            <Link
+              to="/register"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+            >
+              Register
+            </Link>
+
+            <Link
+              to="/create"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+            >
+              Add Movie
+            </Link>
+
+            <Link
+              to="/about"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+            >
+              About
+            </Link>
+
+            <Link
+              to="/my-profile"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+            >
+              My profile
+            </Link>
+            <Link
+              to="/catalog"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: '16px',
+              }}
+              color="inherit"
+            >
+              Catalog
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>
