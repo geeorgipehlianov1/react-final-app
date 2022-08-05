@@ -7,8 +7,9 @@ import { CreateBook } from './components/Create/index'
 import { EditBook } from './components/Edit/index'
 import { Catalog } from './components/Catalog/index'
 import { Details } from './components/Details/index'
-import { Routes, Route } from 'react-router-dom'
+import { About } from './components/About'
 import { NotFound } from './components/NotFound/index'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/edit/:id" element={<EditBook />} />
+        <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       {/* <Footer></Footer> */}

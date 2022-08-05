@@ -10,6 +10,7 @@ export const Login = () => {
 
   const onLoginHandler = async () => {
     const data = await login({ email, password })
+    localStorage.setItem('token', data.data.accessToken)
     console.log(data)
   }
 

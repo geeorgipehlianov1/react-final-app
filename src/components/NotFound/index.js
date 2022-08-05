@@ -14,7 +14,7 @@ export const NotFound = () => {
         flexFlow: 'column',
       }}
     >
-      <Box>
+      <Box sx={{ marginTop: '16px' }}>
         <img src="./404.png" alt="NotFond" width="800px" />
       </Box>
       <Button variant="contained" sx={{ backgroundColor: '#1065E6' }}>
