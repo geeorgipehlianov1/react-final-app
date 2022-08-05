@@ -16,7 +16,7 @@ export const NavBar = () => {
   }, [localStorage])
 
   return (
-    <AppContainer sx={{ maxWidth: '1400px' }}>
+    <AppContainer sx={{ maxWidth: '1600px' }}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
