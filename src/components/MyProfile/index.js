@@ -2,17 +2,23 @@ import { Box, Typography, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 import { getAllMoives } from '../../services/movies'
+import { getMyRecords } from '../../services/auth'
 import { AppContainer } from '../Common/AppContainer'
 
 export const MyProfile = () => {
   const [movies, setMovies] = useState()
+  const [records, setRecords] = useState()
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
     ;(async () => {
       const data = await getAllMoives()
+      const myRecords = await getMyRecords(token)
       setMovies(data.data)
+      setRecords(myRecords)
     })()
   }, [])
+  console.log(records)
   return (
     <AppContainer
       sx={{

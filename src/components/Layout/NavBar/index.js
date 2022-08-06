@@ -5,6 +5,8 @@ import Box from '@mui/material/Box'
 import { useState, useEffect } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
+import { logout } from '../../../services/auth'
+
 export const NavBar = () => {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false)
 
@@ -14,6 +16,11 @@ export const NavBar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [localStorage])
+
+  const logoutHandler = async () => {
+    const token = localStorage.getItem('token')
+    return await logout(token)
+  }
 
   return (
     <AppContainer sx={{ maxWidth: '1600px' }}>
@@ -81,6 +88,18 @@ export const NavBar = () => {
                     }}
                   >
                     My profile
+                  </Link>
+                  <Link
+                    to="/"
+                    style={{
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      fontSize: '16px',
+                      marginRight: '8px',
+                    }}
+                    onClick={logoutHandler}
+                  >
+                    Logout
                   </Link>
                 </>
               </>

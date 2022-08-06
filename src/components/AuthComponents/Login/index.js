@@ -1,5 +1,6 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { AppContainer } from '../../Common/AppContainer'
 import { login } from '../../../services/auth'
@@ -7,11 +8,12 @@ import { login } from '../../../services/auth'
 export const Login = () => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const navigate = useNavigate()
 
   const onLoginHandler = async () => {
     const data = await login({ email, password })
     localStorage.setItem('token', data.data.accessToken)
-    console.log(data)
+    navigate('/catalog')
   }
 
   return (

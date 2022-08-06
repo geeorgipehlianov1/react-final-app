@@ -1,5 +1,6 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { AppContainer } from '../../Common/AppContainer'
 import { error } from '../../../utils/notifications'
@@ -9,14 +10,17 @@ export const Register = () => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [repass, setRepass] = useState()
+  const navigate = useNavigate()
 
   const onRegisterHandler = async () => {
     try {
       if (password !== repass) {
-        alert('Password dont match')
+        error('Passwords dont match')
       } else {
         const data = await register({ email, password })
         console.log(data.data)
+        localStorage.setItem('token', data.data.accessToken)
+        navigate('/catalog')
       }
     } catch (err) {
       error({ title: 'A user with the same email already exists!' })
