@@ -39,6 +39,17 @@ export const NavBar = () => {
               >
                 Movie List
               </Link>
+              <Link
+                to="/about"
+                style={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  fontSize: '16px',
+                  marginRight: '8px',
+                }}
+              >
+                About
+              </Link>
             </>
             {isUserAuthenticated ? (
               <>
@@ -65,18 +76,6 @@ export const NavBar = () => {
                     }}
                   >
                     Add Movie
-                  </Link>
-
-                  <Link
-                    to="/about"
-                    style={{
-                      color: 'inherit',
-                      textDecoration: 'none',
-                      fontSize: '16px',
-                      marginRight: '8px',
-                    }}
-                  >
-                    About
                   </Link>
                   <Link
                     to="/my-profile"
