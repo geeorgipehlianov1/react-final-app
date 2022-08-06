@@ -1,11 +1,11 @@
 import { Typography, OutlinedInput, Box, Button } from '@mui/material'
-
 import { useNavigate } from 'react-router-dom'
+import { useState, useContext } from 'react'
 import { Image } from 'cloudinary-react'
-import { useState } from 'react'
 
 import { createMovie, uploadImages } from '../../services/movies'
 import { error, success } from '../../utils/notifications/index'
+import { AuthContext } from '../../contexts/AuthContext'
 import { AppContainer } from '../Common/AppContainer'
 import { FileDrop } from '../Common/FileDrop/index'
 
@@ -15,13 +15,18 @@ export const CreateBook = () => {
   const [plot, setPlot] = useState('')
   const [actors, setActors] = useState('')
   const navigate = useNavigate()
-  const token = localStorage.getItem('token')
   const [img, setImageUrl] = useState('')
   const [fileUploadingFlag, setFileUploadingFlag] = useState(false)
 
+  const { user } = useContext(AuthContext)
+
   const onAddMovieHandler = async () => {
     try {
-      const result = await createMovie(token, { title, description, img })
+      const result = await createMovie(user.accessToken, {
+        title,
+        description,
+        img,
+      })
       success('You have successfully added a movie!')
       navigate(`/details/${result.data._id}`)
     } catch (err) {

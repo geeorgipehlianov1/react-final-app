@@ -12,7 +12,8 @@ export const HomePage = () => {
   useEffect(() => {
     ;(async () => {
       const data = await getAllMoives()
-      setMovies(data.data)
+      const updatedArray = data.data.slice(-3)
+      setMovies(updatedArray)
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

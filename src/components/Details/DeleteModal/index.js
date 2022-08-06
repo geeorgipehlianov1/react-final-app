@@ -1,19 +1,21 @@
 import { Box, Typography, Button } from '@mui/material'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
 
-import { ModalComponent } from '../../Common/Modal'
 import { deleteMovie } from '../../../services/movies'
+import { AuthContext } from '../../../contexts/AuthContext'
+import { ModalComponent } from '../../Common/Modal'
 
 import { error, success } from '../../../utils/notifications'
 
 export const DeleteMoiveModal = ({ isOpen, closeModal, movie }) => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
 
   const onConfirmHandler = async () => {
-    const token = localStorage.getItem('token')
     try {
-      await deleteMovie(id, token)
+      await deleteMovie(id, user.accessToken)
       success(`You have successfullt deleted ${movie.title} `)
       closeModal()
       navigate('/catalog')

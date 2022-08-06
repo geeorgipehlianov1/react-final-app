@@ -1,14 +1,16 @@
 import { Box, Typography, Button } from '@mui/material'
 import { useParams, Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import { getMovieById } from '../../services/movies'
+import { AuthContext } from '../../contexts/AuthContext'
 import { AppContainer } from '../Common/AppContainer'
 import { DeleteMoiveModal } from './DeleteModal/index'
 
 export const Details = () => {
   const [movie, setMovie] = useState()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const { user } = useContext(AuthContext)
   const { id } = useParams()
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const Details = () => {
           <Box sx={{ display: 'flex', gap: '16px' }}>
             <Box>
               <img
-                src={movie.img}
+                src={movie.img && movie.img}
                 alt="movie"
                 width="300px"
                 height="400px"
@@ -49,19 +51,24 @@ export const Details = () => {
             <Box>
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
-              <Box sx={{ marginTop: '240px' }}>
-                <Button variant="contained" sx={{ backgroundColor: '#1065E6' }}>
-                  <Link
-                    to={`/edit/${id}`}
-                    style={{ color: 'white', textDecoration: 'none' }}
+              {user._id === movie._ownerId && (
+                <Box sx={{ marginTop: '240px' }}>
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: '#1065E6' }}
                   >
-                    Edit
-                  </Link>
-                </Button>
-                <Button sx={{ color: 'red' }} onClick={onDeleteHandler}>
-                  Delete
-                </Button>
-              </Box>
+                    <Link
+                      to={`/edit/${id}`}
+                      style={{ color: 'white', textDecoration: 'none' }}
+                    >
+                      Edit
+                    </Link>
+                  </Button>
+                  <Button sx={{ color: 'red' }} onClick={onDeleteHandler}>
+                    Delete
+                  </Button>
+                </Box>
+              )}
             </Box>
           </Box>
         </>

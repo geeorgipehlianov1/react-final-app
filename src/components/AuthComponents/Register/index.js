@@ -21,7 +21,6 @@ export const Register = () => {
       } else {
         const data = await register({ email, password })
         userLogin(data.data)
-        localStorage.setItem('token', data.data.accessToken)
         navigate('/catalog')
       }
     } catch (err) {

@@ -1,9 +1,10 @@
 import { Typography, OutlinedInput, Box, Button } from '@mui/material'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Image } from 'cloudinary-react'
 
 import { getMovieById, updateMovie, uploadImages } from '../../services/movies'
+import { AuthContext } from '../../contexts/AuthContext'
 import { error, success } from '../../utils/notifications'
 import { AppContainer } from '../Common/AppContainer'
 import { FileDrop } from '../Common/FileDrop/index'
@@ -19,6 +20,7 @@ export const EditBook = () => {
   const [fileUploadingFlag, setFileUploadingFlag] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     ;(async () => {
@@ -29,10 +31,10 @@ export const EditBook = () => {
     })()
   }, [id])
 
+  console.log(movieImg)
   const onSubmitHandler = async () => {
     try {
-      const token = localStorage.getItem('token')
-      await updateMovie(id, { title, description, img }, token)
+      await updateMovie(id, { title, description, img }, user.accessToken)
       success('You have successfully edited the movie!')
       navigate(`/details/${id}`)
     } catch (err) {

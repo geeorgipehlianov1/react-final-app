@@ -16,7 +16,6 @@ export const Login = () => {
   const onLoginHandler = async () => {
     try {
       const data = await login({ email, password })
-      localStorage.setItem('token', data.data.accessToken)
       userLogin(data.data)
       navigate('/catalog')
     } catch (err) {
