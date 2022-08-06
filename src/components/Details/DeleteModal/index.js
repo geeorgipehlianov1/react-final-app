@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { ModalComponent } from '../../Common/Modal'
 import { deleteMovie } from '../../../services/movies'
 
+import { error, success } from '../../../utils/notifications'
+
 export const DeleteMoiveModal = ({ isOpen, closeModal, movie }) => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -12,10 +14,12 @@ export const DeleteMoiveModal = ({ isOpen, closeModal, movie }) => {
     const token = localStorage.getItem('token')
     try {
       await deleteMovie(id, token)
+      success(`You have successfullt deleted ${movie.title} `)
       closeModal()
       navigate('/catalog')
     } catch (err) {
-      console.log(err)
+      error('To delete movie you need to be its author!')
+      closeModal()
     }
   }
 

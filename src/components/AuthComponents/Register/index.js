@@ -1,6 +1,6 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
 import { error } from '../../../utils/notifications'
@@ -22,84 +22,86 @@ export const Register = () => {
         navigate('/catalog')
       }
     } catch (err) {
-      error({ title: 'A user with the same email already exists!' })
+      error(err.response.data.message)
     }
   }
 
   return (
-    <AppContainer
-      sx={{
-        maxWidth: '500px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: '72px',
-        paddingTop: '72px',
-        flexFlow: 'column',
-      }}
-    >
-      <Box
+    <>
+      <AppContainer
         sx={{
-          width: '100%',
+          maxWidth: '500px',
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'column',
-          borderRadius: '12px',
-          boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.12);',
-          marginTop: '100px',
-          padding: '24px',
+          alignItems: 'center',
+          paddingBottom: '72px',
+          paddingTop: '72px',
+          flexFlow: 'column',
         }}
       >
-        <Box>
-          <Typography fontSize="28px" fontWeight="400px" mb={2}>
-            Register
-          </Typography>
-        </Box>
         <Box
           sx={{
+            width: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            gap: '24px',
-            alignItems: 'ceter',
+            alignItems: 'center',
             justifyContent: 'center',
+            flexDirection: 'column',
+            borderRadius: '12px',
+            boxShadow: '0px 0px 8px 1px rgba(0, 0, 0, 0.12);',
+            marginTop: '100px',
+            padding: '24px',
           }}
         >
-          <OutlinedInput
-            placeholder="Add email"
-            onChange={(e) => setEmail(e.target.value)}
-            sx={{ width: '300px', height: '44px' }}
-          />
+          <Box>
+            <Typography fontSize="28px" fontWeight="400px" mb={2}>
+              Register
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '24px',
+              alignItems: 'ceter',
+              justifyContent: 'center',
+            }}
+          >
+            <OutlinedInput
+              placeholder="Add email"
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{ width: '300px', height: '44px' }}
+            />
 
-          <OutlinedInput
-            placeholder="Add password"
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            sx={{ width: '300px', height: '44px' }}
-          />
+            <OutlinedInput
+              placeholder="Add password"
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              sx={{ width: '300px', height: '44px' }}
+            />
 
-          <OutlinedInput
-            placeholder="Repeat password"
-            onChange={(e) => setRepass(e.target.value)}
-            type="password"
-            sx={{ width: '300px', height: '44px' }}
-          />
+            <OutlinedInput
+              placeholder="Repeat password"
+              onChange={(e) => setRepass(e.target.value)}
+              type="password"
+              sx={{ width: '300px', height: '44px' }}
+            />
+          </Box>
+          <Button
+            variant={'contained'}
+            sx={{
+              height: '44px',
+              fontSize: '14px',
+              marginTop: '20px',
+              color: 'white',
+              backgroundColor: '#1065E6',
+              width: '100px',
+            }}
+            onClick={onRegisterHandler}
+          >
+            Register
+          </Button>
         </Box>
-        <Button
-          variant={'contained'}
-          sx={{
-            height: '44px',
-            fontSize: '14px',
-            marginTop: '20px',
-            color: 'white',
-            backgroundColor: '#1065E6',
-            width: '100px',
-          }}
-          onClick={onRegisterHandler}
-        >
-          Register
-        </Button>
-      </Box>
-    </AppContainer>
+      </AppContainer>
+    </>
   )
 }
