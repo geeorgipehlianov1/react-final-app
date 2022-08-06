@@ -27,3 +27,16 @@ export const deleteMovie = async (id, token) => {
     headers: { 'X-Authorization': token },
   })
 }
+
+export const uploadImages = async (image, setImageUrl) => {
+  const formData = new FormData()
+  formData.append('file', image)
+  formData.append('upload_preset', 'nkvljsem')
+
+  const result = await axios.post(
+    'https://api.cloudinary.com/v1_1/dxtxp3sb8/image/upload',
+    formData,
+  )
+  setImageUrl(result.data.url)
+  console.log(result)
+}

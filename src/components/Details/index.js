@@ -36,9 +36,15 @@ export const Details = () => {
     >
       {movie && (
         <>
-          <Box sx={{ display: 'flex', gap: '8px' }}>
+          <Box sx={{ display: 'flex', gap: '16px' }}>
             <Box>
-              <img src={movie.img} alt="movie" width="300px" height="400px" />
+              <img
+                src={movie.img}
+                alt="movie"
+                width="300px"
+                height="400px"
+                style={{ borderRadius: '12px' }}
+              />
             </Box>
             <Box>
               <Typography>{movie.title}</Typography>
