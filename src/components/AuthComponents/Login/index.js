@@ -6,8 +6,8 @@ import { AppContainer } from '../../Common/AppContainer'
 import { login } from '../../../services/auth'
 
 export const Login = () => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
   const onLoginHandler = async () => {
@@ -66,6 +66,7 @@ export const Login = () => {
             placeholder="Add password"
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            value={password}
             sx={{ width: '300px', height: '44px' }}
           />
         </Box>
