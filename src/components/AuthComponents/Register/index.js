@@ -1,7 +1,8 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
+import { AuthContext } from '../../../contexts/AuthContext'
 import { AppContainer } from '../../Common/AppContainer'
 import { error } from '../../../utils/notifications'
 import { register } from '../../../services/auth'
@@ -10,6 +11,7 @@ export const Register = () => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [repass, setRepass] = useState()
+  const { userLogin } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const onRegisterHandler = async () => {
@@ -18,6 +20,7 @@ export const Register = () => {
         error('Passwords dont match')
       } else {
         const data = await register({ email, password })
+        userLogin(data.data)
         localStorage.setItem('token', data.data.accessToken)
         navigate('/catalog')
       }

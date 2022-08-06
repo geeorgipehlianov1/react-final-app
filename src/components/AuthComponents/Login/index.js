@@ -1,21 +1,23 @@
 import { Box, Typography, OutlinedInput, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
+import { AuthContext } from '../../../contexts/AuthContext'
 import { AppContainer } from '../../Common/AppContainer'
-import { error, success } from '../../../utils/notifications'
+import { error } from '../../../utils/notifications'
 import { login } from '../../../services/auth'
 
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { userLogin } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const onLoginHandler = async () => {
     try {
       const data = await login({ email, password })
       localStorage.setItem('token', data.data.accessToken)
-      success('Hello')
+      userLogin(data.data)
       navigate('/catalog')
     } catch (err) {
       error(err.response.data.message)

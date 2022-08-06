@@ -2,24 +2,21 @@ import Toolbar from '@mui/material/Toolbar'
 import AppBar from '@mui/material/AppBar'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 
 import { AppContainer } from '../../Common/AppContainer'
-import { logout } from '../../../services/auth'
-
+import { AuthContext } from '../../../contexts/AuthContext'
+import { BASE_URL } from '../../../constants/index'
 export const NavBar = () => {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false)
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setIsUserAuthenticated(true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [localStorage])
+  const { user, userLogin } = useContext(AuthContext)
+  console.log(user)
 
   const logoutHandler = async () => {
-    const token = localStorage.getItem('token')
-    return await logout(token)
+    userLogin({})
+    return await fetch(`${BASE_URL}users/logout`, {
+      method: 'GET',
+      headers: { 'X-Authorization': user.accessToken },
+    })
   }
 
   return (
@@ -51,7 +48,7 @@ export const NavBar = () => {
                 About
               </Link>
             </>
-            {isUserAuthenticated ? (
+            {user.accessToken ? (
               <>
                 <>
                   <Link

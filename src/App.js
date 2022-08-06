@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Login } from './components/AuthComponents/Login'
 import { Register } from './components/AuthComponents/Register'
 import { HomePage } from './components/Home/index'
@@ -10,25 +12,34 @@ import { Details } from './components/Details/index'
 import { About } from './components/About'
 import { MyProfile } from './components/MyProfile/index'
 import { NotFound } from './components/NotFound/index'
+import { AuthContext } from './contexts/AuthContext'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
+  const [auth, setAuth] = useState({})
+
+  const userLogin = (authData) => {
+    setAuth(authData)
+  }
+
   return (
     <>
-      <NavBar></NavBar>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/details/:id" element={<Details />} />
-        <Route path="/create" element={<CreateBook />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/edit/:id" element={<EditBook />} />
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/my-profile" element={<MyProfile />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-      {/* <Footer></Footer> */}
+      <AuthContext.Provider value={{ user: auth, userLogin }}>
+        <NavBar></NavBar>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/details/:id" element={<Details />} />
+          <Route path="/create" element={<CreateBook />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/edit/:id" element={<EditBook />} />
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/my-profile" element={<MyProfile />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+        {/* <Footer></Footer> */}
+      </AuthContext.Provider>
     </>
   )
 }
