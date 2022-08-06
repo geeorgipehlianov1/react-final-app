@@ -1,25 +1,35 @@
 import { Typography, OutlinedInput, Box, Button } from '@mui/material'
-import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
-import { getMovieById } from '../../services/movies'
+import { getMovieById, updateMovie } from '../../services/movies'
 import { AppContainer } from '../Common/AppContainer'
 
 export const EditBook = () => {
-  const [movie, setMovie] = useState()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [plot, setPlot] = useState('')
+  const [actors, setActors] = useState('')
   const navigate = useNavigate()
-
   const { id } = useParams()
 
   useEffect(() => {
     ;(async () => {
       const data = await getMovieById(id)
-      setMovie(data.data)
+      setTitle(data.data.title)
+      setDescription(data.data.description)
     })()
   }, [id])
 
-  const onSubmitHandler = () => {
-    navigate(`/details/${id}`)
+  const onSubmitHandler = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      console.log(token)
+      updateMovie(id, { title, description }, token)
+      navigate(`/details/${id}`)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -40,8 +50,9 @@ export const EditBook = () => {
       <Box>
         <Typography mb={1}>Title</Typography>
         <OutlinedInput
-          value={movie && movie.title}
+          value={title}
           sx={{ width: '300px', height: '44px' }}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Box>
 
@@ -49,22 +60,27 @@ export const EditBook = () => {
         <Typography mb={1}>Description</Typography>
 
         <OutlinedInput
-          value={movie && movie.description}
+          value={description}
           sx={{ width: '300px', height: '44px' }}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Box>
       <Box>
         <Typography mb={1}>Plot</Typography>
         <OutlinedInput
+          value={plot}
           placeholder="Action..."
           sx={{ width: '300px', height: '44px' }}
+          onChange={(e) => setPlot(e.target.value)}
         />
       </Box>
       <Box>
         <Typography mb={1}>Actors</Typography>
         <OutlinedInput
+          value={actors}
           placeholder="Tom Cruise.."
           sx={{ width: '300px', height: '44px' }}
+          onChange={(e) => setActors(e.target.value)}
         />
       </Box>
       <Button
