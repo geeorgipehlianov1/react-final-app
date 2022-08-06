@@ -1,10 +1,22 @@
 import { Box, Typography, Button } from '@mui/material'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import { ModalComponent } from '../../Common/Modal'
+import { deleteMovie } from '../../../services/movies'
 
 export const DeleteMoiveModal = ({ isOpen, closeModal, movie }) => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+
   const onConfirmHandler = async () => {
-    closeModal()
+    const token = localStorage.getItem('token')
+    try {
+      await deleteMovie(id, token)
+      closeModal()
+      navigate('/catalog')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

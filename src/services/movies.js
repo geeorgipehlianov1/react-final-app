@@ -23,5 +23,7 @@ export const updateMovie = async (id, data, token) => {
 }
 
 export const deleteMovie = async (id, token) => {
-  return axios.delete(`${BASE_URL}data/movies/${id}`)
+  return axios.delete(`${BASE_URL}data/movies/${id}`, {
+    headers: { 'X-Authorization': token },
+  })
 }
