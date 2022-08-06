@@ -1,4 +1,5 @@
 import { Box, Typography, Button } from '@mui/material'
+import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { getMovieById } from '../../services/movies'
@@ -8,13 +9,14 @@ import { DeleteMoiveModal } from './DeleteModal/index'
 export const Details = () => {
   const [movie, setMovie] = useState()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const { id } = useParams()
 
   useEffect(() => {
     ;(async () => {
-      const data = await getMovieById()
+      const data = await getMovieById(id)
       setMovie(data.data)
     })()
-  }, [])
+  }, [id])
 
   const onDeleteHandler = () => {
     setIsDeleteModalOpen(true)
@@ -42,11 +44,13 @@ export const Details = () => {
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
               <Box sx={{ marginTop: '240px' }}>
-                <Button
-                  variant="contained"
-                  sx={{ color: 'white', backgroundColor: '#1065E6' }}
-                >
-                  Edit
+                <Button variant="contained" sx={{ backgroundColor: '#1065E6' }}>
+                  <Link
+                    to={`/edit/${id}`}
+                    style={{ color: 'white', textDecoration: 'none' }}
+                  >
+                    Edit
+                  </Link>
                 </Button>
                 <Button sx={{ color: 'red' }} onClick={onDeleteHandler}>
                   Delete

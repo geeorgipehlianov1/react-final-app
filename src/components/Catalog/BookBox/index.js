@@ -1,4 +1,5 @@
-import { Box, Typography, Button } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export const MovieBox = ({ movie }) => {
   return (
@@ -18,7 +19,7 @@ export const MovieBox = ({ movie }) => {
         <Box>
           <Typography mb={0.5}>{movie.title}</Typography>
           <img src={movie.img} alt="Movie" width="200px" height="200px" />
-          <Button>See more details</Button>
+          <Link to={`/details/${movie._id}`}>See more details</Link>
         </Box>
         <Box>
           <Typography mt={3}>{movie.description.slice(0, 80)}...</Typography>

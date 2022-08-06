@@ -1,8 +1,27 @@
 import { Typography, OutlinedInput, Box, Button } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
+import { getMovieById } from '../../services/movies'
 import { AppContainer } from '../Common/AppContainer'
 
 export const EditBook = () => {
+  const [movie, setMovie] = useState()
+  const navigate = useNavigate()
+
+  const { id } = useParams()
+
+  useEffect(() => {
+    ;(async () => {
+      const data = await getMovieById(id)
+      setMovie(data.data)
+    })()
+  }, [id])
+
+  const onSubmitHandler = () => {
+    navigate(`/details/${id}`)
+  }
+
   return (
     <AppContainer
       sx={{
@@ -20,20 +39,33 @@ export const EditBook = () => {
 
       <Box>
         <Typography mb={1}>Title</Typography>
-        <OutlinedInput sx={{ width: '300px', height: '44px' }} />
+        <OutlinedInput
+          value={movie && movie.title}
+          sx={{ width: '300px', height: '44px' }}
+        />
       </Box>
 
       <Box>
         <Typography mb={1}>Description</Typography>
-        <OutlinedInput sx={{ width: '300px', height: '44px' }} />
+
+        <OutlinedInput
+          value={movie && movie.description}
+          sx={{ width: '300px', height: '44px' }}
+        />
       </Box>
       <Box>
         <Typography mb={1}>Plot</Typography>
-        <OutlinedInput sx={{ width: '300px', height: '44px' }} />
+        <OutlinedInput
+          placeholder="Action..."
+          sx={{ width: '300px', height: '44px' }}
+        />
       </Box>
       <Box>
         <Typography mb={1}>Actors</Typography>
-        <OutlinedInput sx={{ width: '300px', height: '44px' }} />
+        <OutlinedInput
+          placeholder="Tom Cruise.."
+          sx={{ width: '300px', height: '44px' }}
+        />
       </Box>
       <Button
         sx={{
@@ -45,6 +77,7 @@ export const EditBook = () => {
           width: '300px',
         }}
         variant="contained"
+        onClick={onSubmitHandler}
       >
         Submit changes
       </Button>

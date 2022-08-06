@@ -29,7 +29,8 @@ export const DeleteMoiveModal = ({ isOpen, closeModal, movie }) => {
             Delete Movie
           </Typography>
           <Typography variant="body2" mb={4} sx={{ color: '#343840' }}>
-            Are you sure you want to delete {movie && movie.title}
+            Are you sure you want to delete {movie && movie.title} from your
+            Movie List
           </Typography>
           <Box
             sx={{
