@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
 import { Box, Typography } from '@mui/material'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { AppContainer } from '../Common/AppContainer'
 import { AuthContext } from '../../contexts/AuthContext'
@@ -32,7 +32,7 @@ export const MyProfile = () => {
         maxWidth: '1200px',
       }}
     >
-      {myMovies.length !== 0 ? (
+      {myMovies && myMovies.length !== 0 ? (
         <>
           <Typography fontSize="28px">Hello {user.email}</Typography>
           <Typography fontSize="20px">
@@ -70,7 +70,12 @@ export const MyProfile = () => {
             <Typography>
               We are sorry but you still don't have any added movies yet!
             </Typography>
-            {/* <Link to="/cataolg">Here</Link> */}
+            <Link
+              to="/create"
+              style={{ textDecoration: 'none', marginTop: '8px' }}
+            >
+              You can simpli add from here!
+            </Link>
           </Box>
         </>
       )}
