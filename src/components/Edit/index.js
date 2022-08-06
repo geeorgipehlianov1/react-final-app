@@ -31,7 +31,6 @@ export const EditBook = () => {
   const onSubmitHandler = async () => {
     try {
       const token = localStorage.getItem('token')
-      console.log(token)
       updateMovie(id, { title, description, img }, token)
       navigate(`/details/${id}`)
     } catch (err) {
@@ -39,12 +38,9 @@ export const EditBook = () => {
     }
   }
 
-  console.log(changeImage)
-
   const onFileDrop = async (acceptedFiles) => {
     setFileUploadingFlag(true)
     await uploadImages(acceptedFiles[0], setImageUrl)
-    console.log(acceptedFiles)
     setFileUploadingFlag(false)
   }
 

@@ -38,5 +38,4 @@ export const uploadImages = async (image, setImageUrl) => {
     formData,
   )
   setImageUrl(result.data.url)
-  console.log(result)
 }

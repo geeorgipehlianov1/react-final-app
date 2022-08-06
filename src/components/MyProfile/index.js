@@ -18,7 +18,6 @@ export const MyProfile = () => {
       setRecords(myRecords)
     })()
   }, [])
-  console.log(records)
   return (
     <AppContainer
       sx={{

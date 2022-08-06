@@ -18,16 +18,14 @@ export const CreateBook = () => {
   const [fileUploadingFlag, setFileUploadingFlag] = useState(false)
 
   const onAddMovieHandler = async () => {
-    console.log(img)
     const result = await createMovie(token, { title, description, img })
-    console.log(result)
+
     navigate(`/details/${result.data._id}`)
   }
 
   const onFileDrop = async (acceptedFiles) => {
     setFileUploadingFlag(true)
     await uploadImages(acceptedFiles[0], setImageUrl)
-    console.log(acceptedFiles)
     setFileUploadingFlag(false)
   }
 

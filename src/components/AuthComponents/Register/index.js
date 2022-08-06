@@ -18,7 +18,6 @@ export const Register = () => {
         error('Passwords dont match')
       } else {
         const data = await register({ email, password })
-        console.log(data.data)
         localStorage.setItem('token', data.data.accessToken)
         navigate('/catalog')
       }
