@@ -34,7 +34,7 @@ export const FileDrop = ({
       {fileUploadingFlag === true ? (
         <CircularProgress size={'24px'} />
       ) : (
-        <img src="./plus.png" width="23px" height="23px" alt="Add" />
+        <img src="/plus.png" width="23px" height="23px" alt="Add" />
       )}
       <Typography variant="body2" color="#343840">
         {caption}

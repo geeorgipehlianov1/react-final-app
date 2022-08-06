@@ -40,7 +40,7 @@ export const CreateBook = () => {
         alignItems: 'center',
         paddingBottom: '72px',
         paddingTop: '72px',
-        flexFlow: 'riow',
+        flexFlow: 'row',
         gap: '20px',
       }}
     >
