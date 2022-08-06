@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { getAllMoives } from '../../services/movies'
 import { AppContainer } from '../Common/AppContainer'
-import { MovieBox } from './BookBox/index'
+import { MovieBox } from './MovieBox/index'
 
 export const Catalog = () => {
   const [movies, setMovies] = useState()
@@ -32,7 +32,8 @@ export const Catalog = () => {
           width: '100%',
         }}
       >
-        {movies && movies.map((movie) => <MovieBox movie={movie} />)}
+        {movies &&
+          movies.map((movie) => <MovieBox key={movie._id} movie={movie} />)}
       </Box>
     </AppContainer>
   )
