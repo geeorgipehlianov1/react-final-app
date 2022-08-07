@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Login } from './components/AuthComponents/Login'
 import { Register } from './components/AuthComponents/Register'
 import { HomePage } from './components/Home/index'
-// import { Footer } from './components/Layout/Footer'
+import { Footer } from './components/Layout/Footer'
 import { NavBar } from './components/Layout/NavBar/index'
 import { CreateBook } from './components/Create/index'
 import { EditBook } from './components/Edit/index'
@@ -41,7 +41,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </AuthContext.Provider>
     </>
   )
