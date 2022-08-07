@@ -7,12 +7,11 @@ import { useParams, Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { DeleteMoiveModal } from './DeleteModal/index'
 import { AppContainer } from '../Common/AppContainer'
-import { getMovieById, likes, dislike, getLikes } from '../../services/movies'
+import { getMovieById, likes, dislike } from '../../services/movies'
 
 export const Details = () => {
   const [movie, setMovie] = useState()
   const [likesData, setLikesData] = useState(null)
-  const [isUserLiked, setIsUserLiked] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { user } = useContext(AuthContext)
   const { id } = useParams()
@@ -20,19 +19,10 @@ export const Details = () => {
   useEffect(() => {
     ;(async () => {
       const data = await getMovieById(id)
-      const result = await getLikes()
-      console.log(result.data)
-      const isItLiked = result.data.includes(user._id)
-      console.log(isItLiked)
-      if (isItLiked) {
-        setIsUserLiked(true)
-      }
       setMovie(data.data)
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, likesData])
-
-  console.log(isUserLiked)
+  }, [id])
 
   const onDeleteHandler = () => {
     setIsDeleteModalOpen(true)
