@@ -51,11 +51,18 @@ export const EditBook = () => {
     })()
   }, [id])
 
-  console.log(movieImg)
   const onSubmitHandler = async () => {
     if (isTitleIncorrect === false && isDescriptionIncorrect === false) {
       try {
-        await updateMovie(id, { title, description, img }, user.accessToken)
+        if (img) {
+          await updateMovie(id, { title, description, img }, user.accessToken)
+        } else {
+          await updateMovie(
+            id,
+            { title, description, movieImg },
+            user.accessToken,
+          )
+        }
         success('You have successfully edited the movie!')
         navigate(`/details/${id}`)
       } catch (err) {

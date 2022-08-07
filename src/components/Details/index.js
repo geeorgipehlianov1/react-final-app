@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from 'react'
-import { Box, Typography, Button } from '@mui/material'
-import { useParams, Link } from 'react-router-dom'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import ThumbDownIcon from '@mui/icons-material/ThumbDown'
+import { Box, Typography, Button } from '@mui/material'
+import { useEffect, useState, useContext } from 'react'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import { useParams, Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import { DeleteMoiveModal } from './DeleteModal/index'

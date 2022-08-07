@@ -2,8 +2,8 @@ import { Box, Typography, Button } from '@mui/material'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { deleteMovie } from '../../../services/movies'
 import { AuthContext } from '../../../contexts/AuthContext'
+import { deleteMovie } from '../../../services/movies'
 import { ModalComponent } from '../../Common/Modal'
 
 import { error, success } from '../../../utils/notifications'
