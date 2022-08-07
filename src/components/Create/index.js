@@ -11,7 +11,9 @@ import { FileDrop } from '../Common/FileDrop/index'
 
 export const CreateBook = () => {
   const [title, setTitle] = useState('')
+  const [isTitleIncorrect, setIsTitleIncorrect] = useState(false)
   const [description, setDescription] = useState('')
+  const [isDescriptionIncorrect, setIsDescriptionIncorrect] = useState(false)
   const [plot, setPlot] = useState('')
   const [actors, setActors] = useState('')
   const navigate = useNavigate()
@@ -20,17 +22,37 @@ export const CreateBook = () => {
 
   const { user } = useContext(AuthContext)
 
+  const titleCheck = () => {
+    if (title.length >= 30) {
+      setIsTitleIncorrect(true)
+      return
+    } else {
+      setIsTitleIncorrect(false)
+    }
+  }
+
+  const descriptionCheck = () => {
+    if (description.length < 50) {
+      setIsDescriptionIncorrect(true)
+      return
+    } else {
+      setIsDescriptionIncorrect(false)
+    }
+  }
+
   const onAddMovieHandler = async () => {
-    try {
-      const result = await createMovie(user.accessToken, {
-        title,
-        description,
-        img,
-      })
-      success('You have successfully added a movie!')
-      navigate(`/details/${result.data._id}`)
-    } catch (err) {
-      error('To add movie you have to log in!')
+    if (isTitleIncorrect === false && isDescriptionIncorrect === false) {
+      try {
+        const result = await createMovie(user.accessToken, {
+          title,
+          description,
+          img,
+        })
+        success('You have successfully added a movie!')
+        navigate(`/details/${result.data._id}`)
+      } catch (err) {
+        error('To add movie you have to log in!')
+      }
     }
   }
 
@@ -61,20 +83,32 @@ export const CreateBook = () => {
             <Typography mb={1}>Title</Typography>
             <OutlinedInput
               value={title}
+              onBlur={titleCheck}
               placeholder="Add movie name here"
               sx={{ width: '300px', height: '44px' }}
               onChange={(e) => setTitle(e.target.value)}
             />
           </Box>
+          {isTitleIncorrect && (
+            <Typography variant="body2" sx={{ color: 'red' }}>
+              Name must be at most 30 characters long{' '}
+            </Typography>
+          )}
 
           <Box>
             <Typography mb={1}>Description</Typography>
             <OutlinedInput
               value={description}
+              onBlur={descriptionCheck}
               placeholder="Add movie name description"
               sx={{ width: '300px', height: '44px' }}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {isDescriptionIncorrect && (
+              <Typography variant="body2" sx={{ color: 'red' }}>
+                Description must be at least 50 characters long
+              </Typography>
+            )}
           </Box>
           <Box>
             <Typography mb={1}>Plot</Typography>

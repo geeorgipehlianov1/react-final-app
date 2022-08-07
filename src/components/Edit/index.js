@@ -22,6 +22,26 @@ export const EditBook = () => {
   const { id } = useParams()
   const { user } = useContext(AuthContext)
 
+  const [isTitleIncorrect, setIsTitleIncorrect] = useState(false)
+  const [isDescriptionIncorrect, setIsDescriptionIncorrect] = useState(false)
+  const titleCheck = () => {
+    if (title.length >= 30) {
+      setIsTitleIncorrect(true)
+      return
+    } else {
+      setIsTitleIncorrect(false)
+    }
+  }
+
+  const descriptionCheck = () => {
+    if (description.length < 50) {
+      setIsDescriptionIncorrect(true)
+      return
+    } else {
+      setIsDescriptionIncorrect(false)
+    }
+  }
+
   useEffect(() => {
     ;(async () => {
       const data = await getMovieById(id)
@@ -33,13 +53,15 @@ export const EditBook = () => {
 
   console.log(movieImg)
   const onSubmitHandler = async () => {
-    try {
-      await updateMovie(id, { title, description, img }, user.accessToken)
-      success('You have successfully edited the movie!')
-      navigate(`/details/${id}`)
-    } catch (err) {
-      console.log(err)
-      error('To edit movie you need to be its author!')
+    if (isTitleIncorrect === false && isDescriptionIncorrect === false) {
+      try {
+        await updateMovie(id, { title, description, img }, user.accessToken)
+        success('You have successfully edited the movie!')
+        navigate(`/details/${id}`)
+      } catch (err) {
+        console.log(err)
+        error('To edit movie you need to be its author!')
+      }
     }
   }
 
@@ -70,19 +92,31 @@ export const EditBook = () => {
             <Typography mb={1}>Title</Typography>
             <OutlinedInput
               value={title}
+              onBlur={titleCheck}
               sx={{ width: '300px', height: '44px' }}
               onChange={(e) => setTitle(e.target.value)}
             />
           </Box>
+          {isTitleIncorrect && (
+            <Typography variant="body2" sx={{ color: 'red' }}>
+              Name must be at most 30 characters long{' '}
+            </Typography>
+          )}
 
           <Box>
             <Typography mb={1}>Description</Typography>
 
             <OutlinedInput
               value={description}
+              onBlur={descriptionCheck}
               sx={{ width: '300px', height: '44px' }}
               onChange={(e) => setDescription(e.target.value)}
             />
+            {isDescriptionIncorrect && (
+              <Typography variant="body2" sx={{ color: 'red' }}>
+                Description must be at least 50 characters long
+              </Typography>
+            )}
           </Box>
           <Box>
             <Typography mb={1}>Plot</Typography>
@@ -117,7 +151,7 @@ export const EditBook = () => {
             Submit changes
           </Button>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }} mt={5}>
           {changeImage ? (
             <>
               {img ? (
