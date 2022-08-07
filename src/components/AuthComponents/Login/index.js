@@ -10,16 +10,39 @@ import { login } from '../../../services/auth'
 export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isEmailWrong, setIsEmailWrong] = useState(false)
+  const [isPasswordWrong, setIsPasswordWrong] = useState(false)
   const { userLogin } = useContext(AuthContext)
   const navigate = useNavigate()
 
+  const passwordCheck = () => {
+    if (password.length < 6) {
+      setIsPasswordWrong(true)
+      return
+    } else {
+      setIsPasswordWrong(false)
+    }
+  }
+
+  const emailCheck = () => {
+    const pattern = /^([a-zA-Z]+)@([a-zA-Z]+)\.([a-zA-Z]+)$/g
+    if (!email.match(pattern)) {
+      setIsEmailWrong(true)
+      return
+    } else {
+      setIsEmailWrong(false)
+    }
+  }
+
   const onLoginHandler = async () => {
-    try {
-      const data = await login({ email, password })
-      userLogin(data.data)
-      navigate('/catalog')
-    } catch (err) {
-      error(err.response.data.message)
+    if (isPasswordWrong === false && isEmailWrong === false) {
+      try {
+        const data = await login({ email, password })
+        userLogin(data.data)
+        navigate('/catalog')
+      } catch (err) {
+        error(err.response.data.message)
+      }
     }
   }
 
@@ -66,17 +89,28 @@ export const Login = () => {
             <OutlinedInput
               placeholder="Add email"
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={emailCheck}
               value={email}
               sx={{ width: '300px', height: '44px' }}
             />
-
+            {isEmailWrong && (
+              <Typography sx={{ color: 'red' }}>
+                Valid email pattern: name@abv.bg
+              </Typography>
+            )}
             <OutlinedInput
               placeholder="Add password"
               onChange={(e) => setPassword(e.target.value)}
+              onBlur={passwordCheck}
               type="password"
               value={password}
               sx={{ width: '300px', height: '44px' }}
             />
+            {isPasswordWrong && (
+              <Typography sx={{ color: 'red' }}>
+                Password must be at least 6 characters long
+              </Typography>
+            )}
           </Box>
           <Button
             variant={'contained'}

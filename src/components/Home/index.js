@@ -46,7 +46,7 @@ export const HomePage = () => {
           <Link style={{ textDecoration: 'none' }} to="/register">
             Register
           </Link>
-          , only email required.
+          , only email is required.
         </Typography>
       </Box>
       <Box
