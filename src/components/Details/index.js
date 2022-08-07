@@ -1,11 +1,13 @@
+import { useEffect, useState, useContext } from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { useParams, Link } from 'react-router-dom'
-import { useEffect, useState, useContext } from 'react'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import ThumbDownIcon from '@mui/icons-material/ThumbDown'
 
-import { getMovieById } from '../../services/movies'
 import { AuthContext } from '../../contexts/AuthContext'
-import { AppContainer } from '../Common/AppContainer'
 import { DeleteMoiveModal } from './DeleteModal/index'
+import { AppContainer } from '../Common/AppContainer'
+import { getMovieById } from '../../services/movies'
 
 export const Details = () => {
   const [movie, setMovie] = useState()
@@ -51,8 +53,16 @@ export const Details = () => {
             <Box>
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
+              <Box sx={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                <ThumbUpIcon
+                  onClick={() => console.log('yes')}
+                  style={{ color: '#1065E6', cursor: 'pointer' }}
+                />
+                <ThumbDownIcon style={{ color: 'red', cursor: 'pointer' }} />
+              </Box>
+
               {user._id === movie._ownerId && (
-                <Box sx={{ marginTop: '240px' }}>
+                <Box sx={{ marginTop: '200px' }}>
                   <Button
                     variant="contained"
                     sx={{ backgroundColor: '#1065E6' }}

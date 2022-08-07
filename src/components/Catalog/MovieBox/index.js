@@ -19,7 +19,16 @@ export const MovieBox = ({ movie }) => {
         <Box>
           <Typography mb={0.5}>{movie.title}</Typography>
           <img src={movie.img} alt="Movie" width="200px" height="200px" />
-          <Link to={`/details/${movie._id}`}>See more details</Link>
+          <Link
+            to={`/details/${movie._id}`}
+            style={{
+              textDecoration: 'none',
+              fontSize: '16px',
+              color: '#1065E6',
+            }}
+          >
+            See more details
+          </Link>
         </Box>
         <Box>
           <Typography mt={3}>{movie.description.slice(0, 80)}...</Typography>

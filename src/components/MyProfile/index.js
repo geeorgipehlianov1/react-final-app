@@ -74,7 +74,7 @@ export const MyProfile = () => {
               to="/create"
               style={{ textDecoration: 'none', marginTop: '8px' }}
             >
-              You can simpli add from here!
+              You can simply add from here!
             </Link>
           </Box>
         </>
