@@ -7,10 +7,12 @@ import { useParams, Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { DeleteMoiveModal } from './DeleteModal/index'
 import { AppContainer } from '../Common/AppContainer'
-import { getMovieById } from '../../services/movies'
+import { getMovieById, likes, dislike, getLikes } from '../../services/movies'
 
 export const Details = () => {
   const [movie, setMovie] = useState()
+  const [likesData, setLikesData] = useState(null)
+  const [isUserLiked, setIsUserLiked] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { user } = useContext(AuthContext)
   const { id } = useParams()
@@ -18,13 +20,34 @@ export const Details = () => {
   useEffect(() => {
     ;(async () => {
       const data = await getMovieById(id)
+      const result = await getLikes()
+      console.log(result.data)
+      const isItLiked = result.data.includes(user._id)
+      console.log(isItLiked)
+      if (isItLiked) {
+        setIsUserLiked(true)
+      }
       setMovie(data.data)
     })()
-  }, [id])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, likesData])
+
+  console.log(isUserLiked)
 
   const onDeleteHandler = () => {
     setIsDeleteModalOpen(true)
   }
+
+  const onLikeHandler = async () => {
+    const result = await likes({ likes: '1' }, user.accessToken)
+    setLikesData(result.data)
+  }
+
+  const onDislikeHandler = async () => {
+    await dislike(likesData._id, user.accessToken)
+    setLikesData(null)
+  }
+
   return (
     <AppContainer
       sx={{
@@ -54,11 +77,17 @@ export const Details = () => {
               <Typography>{movie.title}</Typography>
               <Typography>{movie.description}</Typography>
               <Box sx={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
-                <ThumbUpIcon
-                  onClick={() => console.log('yes')}
-                  style={{ color: '#1065E6', cursor: 'pointer' }}
-                />
-                <ThumbDownIcon style={{ color: 'red', cursor: 'pointer' }} />
+                {likesData ? (
+                  <ThumbDownIcon
+                    onClick={onDislikeHandler}
+                    style={{ color: 'red', cursor: 'pointer' }}
+                  />
+                ) : (
+                  <ThumbUpIcon
+                    onClick={onLikeHandler}
+                    style={{ color: '#1065E6', cursor: 'pointer' }}
+                  />
+                )}
               </Box>
 
               {user._id === movie._ownerId && (

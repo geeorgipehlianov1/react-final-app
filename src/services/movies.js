@@ -39,3 +39,19 @@ export const uploadImages = async (image, setImageUrl) => {
   )
   setImageUrl(result.data.url)
 }
+
+export const getLikes = async () => {
+  return await axios.get(`${BASE_URL}data/likes`)
+}
+
+export const likes = async (data, token) => {
+  return await axios.post(`${BASE_URL}data/likes`, data, {
+    headers: { 'X-Authorization': token },
+  })
+}
+
+export const dislike = async (id, token) => {
+  return await axios.delete(`${BASE_URL}data/likes/${id}`, {
+    headers: { 'X-Authorization': token },
+  })
+}
